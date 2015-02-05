@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var OAuthifizer = require('oauthifizer');
 var AuthDelegate = require('./lib/authDelegate');
 
-var Restifizer = require('restifizer').Restifizer;
+var Restifizer = require('restifizer');
 
 var routes = require('./routes/index');
 

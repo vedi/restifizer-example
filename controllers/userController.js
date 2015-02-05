@@ -16,15 +16,17 @@ var UserController = DefaultController.extend({
   ],
   qFields: ['username'],
   insertOptions: {
-    auth: ['bearer', 'oauth2-client-password'], // support both
-    pre: function (req, res, next) {
+    auth: ['bearer', 'oauth2-client-password'] // support both
+  },
+  pre: function (req, res, next) {
+    if (req.restifizer.isInsert()) {
       req.params.scopes = ['own'];    // creating user is not admin
       if (!req.authInfo) {
         req.authInfo = {};
       }
       req.authInfo.scope = 'own';
-      next();
     }
+    next();
   },
   assignFilter: function (dest, source, fieldName, req) {
     var fieldValue = source[fieldName];

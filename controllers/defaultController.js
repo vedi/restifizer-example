@@ -3,7 +3,7 @@
  */
 
 var
-  Restifizer = require('restifizer').Restifizer,
+  Restifizer = require('restifizer'),
   passport = require('oauthifizer').passport;
 
 var DefaultController = Restifizer.Controller.extend({
@@ -16,7 +16,9 @@ var DefaultController = Restifizer.Controller.extend({
     auth: 'bearer'  // default auth strategy
   },
   getAuth: function (options) {
-    return options.auth ? passport.authenticate(options.auth, { session: false }) : this._emptyPre; // inject passport authentication to the project
+    return options.auth ? passport.authenticate(options.auth, { session: false }) : function(req, res, callback) {
+      callback();
+    };
   }
 });
 
