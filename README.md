@@ -1,5 +1,8 @@
 # Restifizer example
 
+> It's just the simplest example. If you want to find anything for a quick start,
+you can use our of seed project, based on MEAN.js with `restifizer` integrated (https://github.com/vedi/restifizer-mean.js)
+
 Welcome to Restifizer example.
 
 It's a joint example project for modules:

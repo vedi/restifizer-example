@@ -2,6 +2,7 @@
  * Created by vedi on 23/08/14.
  */
 var
+  _ = require('lodash'),
   User = require('../models/user'),
   DefaultController = require('./defaultController');
 
@@ -15,8 +16,15 @@ var UserController = DefaultController.extend({
     'scopes'
   ],
   qFields: ['username'],
-  insertOptions: {
-    auth: ['bearer', 'oauth2-client-password'] // support both
+
+  actions: {
+    default: _.defaults({}, DefaultController.prototype.actions.default),
+    insert: {
+      auth: ['bearer', 'oauth2-client-password']  // support both
+    },
+    update: {
+      auth: ['bearer']
+    }
   },
   pre: function (req, res, next) {
     if (req.restifizer.isInsert()) {

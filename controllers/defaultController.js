@@ -12,8 +12,10 @@ var DefaultController = Restifizer.Controller.extend({
       && req.authInfo.scope
       && req.authInfo.scope.indexOf("all") >= 0;
   },
-  defaultOptions: {
-    auth: 'bearer'  // default auth strategy
+  actions: {
+    default: {
+      auth: 'bearer' // default auth strategy
+    }
   },
   getAuth: function (options) {
     return options.auth ? passport.authenticate(options.auth, { session: false }) : function(req, res, callback) {
