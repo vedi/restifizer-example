@@ -22,13 +22,12 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(OAuthifizer.passport.initialize());
-app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var oAuth2 = new OAuthifizer(new AuthDelegate());
 app.route('/oauth')
-  .post(oAuth2.getToken())
+    .post(oAuth2.getToken())
 ;
 
 var restifizer = new Restifizer(app, {});

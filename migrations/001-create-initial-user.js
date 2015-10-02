@@ -13,7 +13,7 @@ exports.up = function (next) {
   Q
     .try(function () {
       console.log("Create default user");
-      var user = new User({ username: "admin", password: "adminadmin", scopes: ["all"]});
+      var user = new User({ username: "admin", password: "adminadmin", roles: ["admin"]});
       return Q.ninvoke(user, "save");
     })
     .then(function () {

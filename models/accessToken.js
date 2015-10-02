@@ -20,7 +20,7 @@ var AccessTokenSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  createdAt: {
+  created: {
     type: Date,
     default: Date.now
   },
