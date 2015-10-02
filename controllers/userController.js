@@ -1,57 +1,64 @@
 /**
  * Created by vedi on 23/08/14.
  */
+ 
+ 'use strict';
 var
+  Bb = require('bluebird'),
   _ = require('lodash'),
+  MongooseDataSource = require('restifizer-mongoose-ds'),
   User = require('../models/user'),
-  DefaultController = require('./defaultController');
+  DefaultController = require('./defaultController'),
+  HTTP_STATUSES = require('http-statuses')
+;
 
-var UserController = DefaultController.extend({
-  ModelClass: User,
+module.exports = DefaultController.extend({
+  dataSource: new MongooseDataSource(User),
   path: '/api/users',
   fields: [
-    'username',
+    'username', 
     'password',
     'createdAt',
-    'scopes'
+    'roles'
   ],
   qFields: ['username'],
-
   actions: {
     default: _.defaults({}, DefaultController.prototype.actions.default),
     insert: {
-      auth: ['bearer', 'oauth2-client-password']  // support both
+      auth: ['bearer', 'oauth2-client-password']
     },
     update: {
       auth: ['bearer']
     }
   },
+
   pre: function (req, res, next) {
-    if (req.restifizer.isInsert()) {
-      req.params.scopes = ['own'];    // creating user is not admin
-      if (!req.authInfo) {
-        req.authInfo = {};
+    if (!req.restifizer.isInsert()) {
+      if (req.params._id === 'me') {
+        req.params._id = req.user.id;
       }
-      req.authInfo.scope = 'own';
     }
+    if (req.restifizer.isInsert()) {
+      // set defaults
+      req.params.provider = req.param('provider') || 'local';
+    } else if (!req.restifizer.isSelect()) {
+      if (!this.isAdmin(req) && (!req.params._id || req.params._id !== req.user.id)) {
+        next(HTTP_STATUSES.FORBIDDEN.createError());
+      }
+    }
+
+    // do not allow list selecting for `users`
+    if (!this.isAdmin(req) && req.restifizer.isSelect() && !req.restifizer.isSelectOne()) {
+      next(HTTP_STATUSES.FORBIDDEN.createError());
+    }
+
     next();
   },
   assignFilter: function (dest, source, fieldName, req) {
     var fieldValue = source[fieldName];
-    if (fieldName == 'password') {
-      // we do not set password to empty value
-      if (fieldValue && fieldValue.length == 0) {
-        return false;
-      }
-    }
-    else if (fieldName == 'scopes') {
-      // only admins are able to change
-      if (!this.isAdmin(req) && !(fieldValue && fieldValue.length == 1 && fieldValue[0] == "own")) {
-        return false;
-      }
-    }
-    return true;
+    // skip empty password
+    // skip roles not from admins
+    return (fieldName !== 'password' || (fieldValue && fieldValue.length !== 0)) &&
+      (fieldName !== 'roles' || this.isAdmin(req) || (fieldValue && fieldValue.length === 1 && fieldValue[0] === 'user'));
   }
 });
-
-module.exports = UserController;
