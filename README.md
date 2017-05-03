@@ -79,4 +79,4 @@ We really appreciate any contribution.
 
 ## License
 
-MIT License. Copyright (c) 2014 Fedor Shubin.
+MIT License. Copyright (c) 2017 Fedor Shubin.
