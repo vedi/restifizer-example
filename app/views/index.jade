@@ -4,7 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
   p It's example project for module a(href='https://github.com/vedi/oauthifizer') oauthifizer.
-  p It's an example of using authDelegate.js. It allows you to be always successfully authenticated, and can be used for understanding how `oauthifizer` works. In order to get authenticated use the path `/oauth`.
+  p It's an example of using auth-delegate.js. It allows you to be always successfully authenticated, and can be used for understanding how `oauthifizer` works. In order to get authenticated use the path `/oauth`.
   pre http POST localhost:3000/oauth/token grant_type=password client_id=app client_secret=secret username=anylogin password=password
   p In order to access to restricted resource try the path `/users'.
   pre http localhost:3000/users Authorization:'Bearer xxx'

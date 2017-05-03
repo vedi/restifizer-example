@@ -1,8 +1,5 @@
 # Restifizer example
 
-> It's just the simplest example. If you want to find anything for a quick start,
-you can use our of seed project, based on MEAN.js with `restifizer` integrated (https://github.com/vedi/restifizer-mean.js)
-
 Welcome to Restifizer example.
 
 It's a joint example project for modules:
@@ -13,20 +10,16 @@ It's a simple RESTful server, containing oauth2 authentication and example of us
 
 ## Getting started
 
+### Requirements
+
+This project needs MongoDB server to be started locally.
+
 ### Installation
 
 ```bash
 git clone https://github.com/vedi/restifizer-example.git
 cd restifizer-example
 npm install
-```
-### Data migration
-
-In order to create initial data please run:
-
-```bash
-sudo npm install -g migrate
-migrate
 ```
 
 ### Running
@@ -37,7 +30,15 @@ npm start
 
 It runs the server on port 3000.
 
-### Testing
+### e2e tests
+
+After you started the server, run the following command:
+```bash
+npm start
+```
+The test suite will be run and you'll see the results in console.
+
+### Try it
 
 Open new Terminal window.
 

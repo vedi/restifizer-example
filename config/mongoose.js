@@ -2,16 +2,23 @@
  * Created by vedi on 23/08/14.
  */
 
-var mongoose    = require('mongoose');
+'use strict';
 
-mongoose.connect('mongodb://localhost/restifizerExample');
-var connection = mongoose.connection;
+const Bb = require('bluebird');
+const mongoose = require('mongoose');
 
-connection.once('open', function callback () {
-  console.log("connected to db.");
+const DB_URL = 'mongodb://localhost/restifizerExample';
+const TEST_DB_URL = 'mongodb://localhost/restifizerExampleTest';
+
+mongoose.Promise = Bb;
+mongoose.connect(process.env.NODE_ENV !== 'test' ? DB_URL : TEST_DB_URL);
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+  console.log('connected to db.');
 });
-connection.on('error', function (err) {
-  console.log('connection error: ' + err.message);
+connection.on('error', (err) => {
+  console.log(`connection error: ${err.message}`);
 });
 
 module.exports = mongoose;
