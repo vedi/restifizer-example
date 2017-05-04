@@ -53,4 +53,5 @@ module.exports = (app) => {
 
 // eslint-disable-next-line global-require
   restifizer.addController(require('../controllers/userpic.controller'));
+  restifizer.addController(require('../controllers/userpic-local.controller'));
 };

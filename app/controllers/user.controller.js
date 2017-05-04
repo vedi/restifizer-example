@@ -23,6 +23,8 @@ class UserController extends BaseController {
         'createdAt',
         'userpic',
         'userpicUrl',
+        'userpicLocal',
+        'userpicLocalUrl',
       ],
       qFields: ['username'],
       readOnlyFields: [
@@ -59,6 +61,11 @@ class UserController extends BaseController {
       const { transportData: { req } } = scope;
       user.userpicUrl = `${req.protocol}://${req.get('host')}/api/users/${user._id}/userpic`;
       delete user.userpic;
+    }
+    if (user.userpicLocal) {
+      const { transportData: { req } } = scope;
+      user.userpicLocalUrl = `${req.protocol}://${req.get('host')}/api/users/${user._id}/userpic-local`;
+      delete user.userpicLocal;
     }
 
     return user;

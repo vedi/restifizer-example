@@ -7,18 +7,20 @@
 const User = require('../models/user.server.model');
 const BaseFileController = require('./base-file.controller');
 
-class UserpicController extends BaseFileController {
+class UserpicLocalController extends BaseFileController {
   constructor(options = {}) {
     Object.assign(options, {
-      storage: 'gridfs',
+      storage: 'local',
+      uploadRoot: 'upload',
+      uploadPath: 'userpic',
       dataSource: {
         type: 'mongoose',
         options: {
           model: User,
         },
       },
-      path: '/api/users/:_id/userpic',
-      fileField: 'userpic',
+      path: '/api/users/:_id/userpic-local',
+      fileField: 'userpicLocal',
       actions: {
         default: BaseFileController.createAction({}),
       },
@@ -35,4 +37,4 @@ class UserpicController extends BaseFileController {
   }
 }
 
-module.exports = UserpicController;
+module.exports = UserpicLocalController;

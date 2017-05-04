@@ -30,6 +30,7 @@ const schema = new mongoose.Schema({
     default: Date.now,
   },
   userpic: mongoose.Schema.Types.Mixed,
+  userpicLocal: mongoose.Schema.Types.Mixed,
 });
 
 /**
