@@ -21,7 +21,8 @@ class UserController extends BaseController {
         'username',
         'password',
         'createdAt',
-        'roles',
+        'userpic',
+        'userpicUrl',
       ],
       qFields: ['username'],
       readOnlyFields: [
@@ -53,6 +54,15 @@ class UserController extends BaseController {
     }
   }
 
+  post(user, scope) {
+    if (user.userpic) {
+      const { transportData: { req } } = scope;
+      user.userpicUrl = `${req.protocol}://${req.get('host')}/api/users/${user._id}/userpic`;
+      delete user.userpic;
+    }
+
+    return user;
+  }
 }
 
 module.exports = UserController;

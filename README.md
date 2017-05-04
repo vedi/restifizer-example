@@ -4,6 +4,7 @@ Welcome to Restifizer example.
 
 It's a joint example project for modules:
  * `restifizer` (https://github.com/vedi/restifizer),
+ * `restifizer-files` (https://github.com/vedi/restifizer-files).
  * `oauthifizer` (https://github.com/vedi/oauthifizer).
 
 It's a simple RESTful server, containing oauth2 authentication and example of usage a resource. 

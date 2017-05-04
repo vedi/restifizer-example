@@ -116,12 +116,11 @@ const specHelper = {
     data = data || userData;
     userId = userId || data._id;
     return this
-      .get(`${testConfig.baseUrl}/api/users/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userData.auth.access_token}`,
-          },
-        })
+      .get(`${testConfig.baseUrl}/api/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${userData.auth.access_token}`,
+        },
+      })
       .then((result) => {
         data._id = result.body._id;
         return result.body;

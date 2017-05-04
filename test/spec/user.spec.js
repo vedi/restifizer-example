@@ -13,10 +13,7 @@ const specHelper = require('../spec-helper');
 const expect = chakram.expect;
 
 describe('User profile', () => {
-  const adminUser = specHelper.getAdminUser();
   const user = specHelper.getFixture(specHelper.FIXTURE_TYPES.USER);
-
-  before('sign in admin', () => specHelper.signInUser(adminUser));
 
   describe('Sign up', () => {
     let response;
@@ -44,7 +41,7 @@ describe('User profile', () => {
         .get(`${config.baseUrl}/api/users`,
       {
         headers: {
-          Authorization: `Bearer ${adminUser.auth.access_token}`,
+          Authorization: `Bearer ${user.auth.access_token}`,
         },
       })
         .then((result) => {
@@ -107,7 +104,7 @@ describe('User profile', () => {
       expect(response).to.have.status(200);
     });
 
-    it('should change firstName', () => {
+    it('should change username', () => {
       expect(response).to.have.json('username', NEW_VALUE);
     });
   });

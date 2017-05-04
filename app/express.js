@@ -5,6 +5,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const multipart = require('connect-multiparty');
 
 const routes = require('./routes/index');
 
@@ -17,6 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+app.use(multipart());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -24,6 +26,7 @@ app.use(require('./middleware/extract-client-oauth2')());
 
 require('./middleware/oauthifizer')(app);
 require('./middleware/restifizer')(app);
+require('./middleware/restifizer-files')(app);
 
 // init restifizer
 

@@ -14,8 +14,9 @@ const mocha = new Mocha({
   fullTrace: true,
 });
 
-mocha.addFile(path.join(__dirname, 'spec/user.spec.js'));
-mocha.addFile(path.join(__dirname, 'spec/user-auth.spec.js'));
+// mocha.addFile(path.join(__dirname, 'spec/user.spec.js'));
+// mocha.addFile(path.join(__dirname, 'spec/user-auth.spec.js'));
+mocha.addFile(path.join(__dirname, 'spec/user-userpic.spec.js'));
 
 // Run the tests.
 mocha.run((failures) => {
