@@ -7,7 +7,7 @@ It's a joint example project for modules:
  * `restifizer-files` (https://github.com/vedi/restifizer-files).
  * `oauthifizer` (https://github.com/vedi/oauthifizer).
 
-It's a simple RESTful server, containing oauth2 authentication and example of usage a resource. 
+It's a simple RESTful server, containing oauth2 authentication and example of usage a resource.
 
 ## Getting started
 
@@ -32,6 +32,8 @@ npm start
 It runs the server on port 3000.
 
 ### e2e tests
+
+> In order to make ftp tests working you should have ftp server run on default port with access for anonymous user.
 
 After you started the server, run the following command:
 ```bash

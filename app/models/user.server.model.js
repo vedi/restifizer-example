@@ -31,6 +31,7 @@ const schema = new mongoose.Schema({
   },
   userpic: mongoose.Schema.Types.Mixed,
   userpicLocal: mongoose.Schema.Types.Mixed,
+  userpicFtp: mongoose.Schema.Types.Mixed,
 });
 
 /**

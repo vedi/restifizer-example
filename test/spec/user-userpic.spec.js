@@ -30,6 +30,11 @@ const expect = chakram.expect;
     urlFieldName: 'userpicLocalUrl',
     fieldUrl: 'userpic-local',
   },
+  {
+    fieldName: 'userpicFtp',
+    urlFieldName: 'userpicFtpUrl',
+    fieldUrl: 'userpic-ftp',
+  },
 ].forEach(({ fieldName, urlFieldName, fieldUrl }) => describe(`User ${fieldName}`, () => {
   const user = specHelper.getFixture(specHelper.FIXTURE_TYPES.USER);
 

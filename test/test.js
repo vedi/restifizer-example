@@ -7,7 +7,6 @@
 const path = require('path');
 const Mocha = require('mocha');
 
-
 // Instantiate a Mocha instance.
 const mocha = new Mocha({
   ui: 'bdd',
